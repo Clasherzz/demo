@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Data to Collections</title>
+  <style>
+    /* Add your CSS styles here */
+    /* For simplicity, styles are kept minimal */
+    .input-container {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="input-container">
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter name">
+  </div>
+  <div class="input-container">
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" placeholder="Enter phone number">
+  </div>
+  <button onclick="addData('DEMO')">Add to DEMO Collection</button>
+  <button onclick="addData('COLLECTION_1')">Add to COLLECTION_1</button>
+  <button onclick="addData('COLLECTION_2')">Add to COLLECTION_2</button>
+
+  <script>
+    function addData(collectionName) {
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+
+      // Send data to server using fetch API or other methods
+      // Here, you can make a POST request to your server with the collected data
+      // Pass the collectionName and data (name, phone) to your server-side logic to add to respective Firestore collection
+      // Example using fetch:
+      fetch('http://localhost:3000/api/addData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ collection: collectionName, name: name, phone: phone }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // Log the response from the server
+        // Optionally, display a success message or handle the response as needed
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle errors or display an error message
+      });
+    }
+  </script>
+</body>
+</html>
